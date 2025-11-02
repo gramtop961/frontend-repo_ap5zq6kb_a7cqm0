@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Sun, Moon } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const PPLX_BLUE = '#335CFF'
 
@@ -32,21 +33,24 @@ export default function Navbar() {
         </a>
         <div className="flex items-center gap-4">
           <span className="hidden rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-black/70 dark:border-white/10 dark:text-white/70 md:inline">Free Forever</span>
-          <a href="#terms" className="hidden text-sm text-black/70 hover:text-black dark:text-white/70 dark:hover:text-white md:inline">Terms</a>
-          <button
+          <a href="#terms" className="hidden text-sm text-black/70 transition-colors hover:text-black dark:text-white/70 dark:hover:text-white md:inline">Terms</a>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             aria-label="Toggle theme"
             onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
             className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-black/10 bg-white text-black transition hover:bg-black/5 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           >
             {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
-          <a
+          </motion.button>
+          <motion.a
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href="#get-started"
             className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold text-white shadow-sm"
             style={{ backgroundColor: PPLX_BLUE }}
           >
             Get Started
-          </a>
+          </motion.a>
         </div>
       </nav>
     </header>
