@@ -1,57 +1,87 @@
-import { motion } from 'framer-motion'
-import { Search, Layers, Boxes, Sparkles } from 'lucide-react'
+import { Layers, Search, Sparkles, MessageSquare } from 'lucide-react'
 
-const features = [
-  {
-    title: '1000+ free tools',
-    desc: 'Carefully curated utilities for design, dev, and growth — all free.',
-    icon: Boxes,
-  },
-  {
-    title: 'Free assets',
-    desc: 'Icons, illustrations, and templates to speed up your workflow.',
-    icon: Layers,
-  },
-  {
-    title: 'UI mockups',
-    desc: 'Ready-to-use mockups and components to prototype faster.',
-    icon: Search,
-  },
-  {
-    title: 'AI search',
-    desc: 'Natural language search finds exactly what you need instantly.',
-    icon: Sparkles,
-  },
-]
+const PPLX_BLUE = '#335CFF'
 
 export default function Features() {
   return (
-    <section id="features" className="mx-auto mt-20 max-w-6xl px-6">
+    <section id="features" className="mx-auto max-w-6xl px-6 py-12 md:py-16">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-white md:text-4xl">Everything in one place</h2>
-        <p className="mt-3 text-white/70">Easy discovery with powerful AI to guide your search.</p>
+        <h2 className="text-3xl font-bold text-black dark:text-white md:text-4xl">Everything you need</h2>
+        <p className="mt-2 text-black/70 dark:text-white/70">Two powerful areas designed to supercharge your productivity.</p>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map((f, i) => (
-          <motion.div
-            key={f.title}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.06 }}
-            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
-          >
-            <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-sky-500/20 text-sky-300 ring-1 ring-inset ring-sky-500/30">
-                <f.icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-lg font-semibold text-white">{f.title}</h3>
-            </div>
-            <p className="mt-3 text-sm text-white/70">{f.desc}</p>
-            <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-sky-400/10 blur-2xl transition-transform duration-500 group-hover:scale-125" />
-          </motion.div>
-        ))}
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* AI Playground */}
+        <Card>
+          <Header icon={<Sparkles className="h-5 w-5" />} title="AI Playground" />
+          <ul className="mt-3 space-y-2 text-sm text-black/80 dark:text-white/80">
+            <li className="flex items-center gap-2"><Dot /> Flashcard creation</li>
+            <li className="flex items-center gap-2"><Dot /> Note summaries</li>
+            <li className="flex items-center gap-2"><Dot /> AI chat</li>
+            <li className="flex items-center gap-2"><Dot /> Free document upload (unlimited)</li>
+            <li className="flex items-center gap-2"><Dot /> Free image upload (unlimited)</li>
+          </ul>
+        </Card>
+        {/* Tool Directory */}
+        <Card>
+          <Header icon={<Search className="h-5 w-5" />} title="Tool Directory" />
+          <ul className="mt-3 space-y-2 text-sm text-black/80 dark:text-white/80">
+            <li className="flex items-center gap-2"><Dot /> 1000+ free tools</li>
+            <li className="flex items-center gap-2"><Dot /> Free assets</li>
+            <li className="flex items-center gap-2"><Dot /> UI mockups</li>
+            <li className="flex items-center gap-2"><Dot /> AI search functionality</li>
+            <li className="flex items-center gap-2"><Dot /> Easy tool discovery</li>
+          </ul>
+        </Card>
+      </div>
+
+      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <Stat>100% Free</Stat>
+        <Stat>1000+ Tools</Stat>
+        <Stat>Unlimited Uploads</Stat>
+        <Stat>AI Powered</Stat>
+      </div>
+
+      <div id="get-started" className="mt-10 flex items-center justify-center">
+        <a
+          href="#"
+          className="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white"
+          style={{ backgroundColor: PPLX_BLUE }}
+        >
+          Get Started
+        </a>
       </div>
     </section>
+  )
+}
+
+function Card({ children }) {
+  return (
+    <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+      {children}
+    </div>
+  )
+}
+
+function Header({ icon, title }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="grid h-10 w-10 place-items-center rounded-lg" style={{ backgroundColor: PPLX_BLUE + '1a' }}>
+        <div className="text-black dark:text-white" style={{ color: PPLX_BLUE }}>{icon}</div>
+      </div>
+      <h3 className="text-lg font-semibold text-black dark:text-white">{title}</h3>
+    </div>
+  )
+}
+
+function Dot() {
+  return <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: PPLX_BLUE }} />
+}
+
+function Stat({ children }) {
+  return (
+    <div className="rounded-xl border border-black/10 bg-white px-4 py-3 text-center text-sm font-medium text-black/80 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
+      {children}
+    </div>
   )
 }
